@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Favorite Food Reporting</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">  
+        <h1> Report of Favorite Foods</h1>
+        <br />
+            <br />
+            <br />            
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Favorite Food</th>
+        </tr>
+        {% for d in data %}
+            <tr>
+                <td>{{ d.name }}</td>
+                <td>{{ d.food }}</td>          
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
