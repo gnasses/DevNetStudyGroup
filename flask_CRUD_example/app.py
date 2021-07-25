@@ -64,7 +64,7 @@ def api():
         check = TABLE.query.filter(TABLE.name == name).all()
         # Duplicate Handling
         if check:
-            return "Error: Name already exists"
+            return {"Error" : "Name already exists"}
         else:
             new_entry = TABLE(name=name, food=food)
             db.session.add(new_entry)
@@ -89,7 +89,7 @@ def api():
             result = TABLES_schema.dump(data)
             return jsonify(result)
         else:
-            return "Error: No entry found for this name. Could not update"            
+            return {"Error" : " No entry found for this name. Could not update"}            
     # Delete only existing entries in the Database if DELETE Request (DELETE)
     if request.method == 'DELETE':
         name = request.get_json().get('name', '')
@@ -99,9 +99,9 @@ def api():
             entry = TABLE.query.get(name)
             db.session.delete(entry)
             db.session.commit()
-            return ("Deleted entry for name: " + name)
+            return {"Deleted entry" :  name}
         else:
-            return "Error: No entry for this name found to delete"
+            return {"Error" : "No entry for this name found to delete"}
  
 @app.route('/api/report', methods=['GET'])
 def api_report():
@@ -110,4 +110,4 @@ def api_report():
             return jsonify(result)
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000)    
+    app.run(host='0.0.0.0', port=5000)    
